@@ -1,3 +1,4 @@
+## Elasticsearch methods
 ### Get nodes status
 ```
 GET _nodes/stats
@@ -8,42 +9,135 @@ GET _cluster/health
 ```
 ### PUT
 ```
-PUT favorite_candy/_doc/1
+PUT name_of_the_index/_doc/_id
 {
-        "fistname": "John",
-        "candy": "Lolipop"
+        "field": "value",
+        "field": "value"
 }
 ```
 ### POST (auto generated id)
 ```
-POST favorite_candy/_doc/
+POST name_of_the_index/_doc/
 {
-        "fistname": "Joe",
-        "candy": "Milo"
+        "field": "value",
+        "field": "value"
 }
 ```
 ### GET
 ```
-GET favorite_candy/_doc/1
+GET name_of_the_index/_doc/_id
 ```
 ### Create END point (not overide the document)
 ```
-PUT favorite_candy/_create/1
+PUT name_of_the_index/_create/_id
 {
-        "fistname": "John",
-        "candy": "Lolipop"
+        "field": "value",
+        "field": "value"
 }
 ```
 ### Update the document
 ```
-POST favorite_candy/_update/1
+POST name_of_the_index/_update/_id
 {
         "doc":{
-                "candy": "M&M"
+                "field": "value"
         }
 }
 ```
 ### Delete the document
 ```
-DELETE favorite_candy/_doc/1
+DELETE name_of_the_index/_doc/_id
+```
+### Retrieve all document from an index
+```
+GET name_of_the_index/_search
+```
+### Get the extact total number of hits
+```
+GET name_of_the_index/_search
+{
+        "track_total_hits": true
+}
+```
+### Search for value within a specific time range
+```
+GET name_of_the_index/_search
+{
+        "query": {
+                "Specify the type of query" {
+                        "field": {
+                                "gte": "lowest value"
+                                "lte": "highest value"
+                        }
+                }
+        }
+}
+```
+### Aggregation (summarizes value as metrics, statistics...etc)
+```
+GET name_of_the_index/_search
+{
+        "aggs": {
+                "name of the aggregation": {
+                        "Specify the type of aggregation": {
+                                "field": "name of the field to aggreate"
+                                "size": how many buckets
+                        }
+                }
+        }
+}
+```
+### Combine query and aggregation
+```
+GET name_of_the_index/_search
+{
+        "query": {
+                "match": {
+                        "field": "value"
+                },
+                "aggregations": {
+                        "name of the aggregation": {
+                             "significant_text": {"field": "value"}   
+                        }
+                }
+        }
+}
+```
+### Recall
+```
+GET name_of_the_index/_search {
+        "query": {
+                "match":{
+                        "Specify the field to search": {
+                                "query": "Enter search terms"
+                        }
+                }
+        }
+}
+```
+### Recall with AND operator
+```
+GET name_of_the_index/_search {
+        "query": {
+                "match":{
+                        "Specify the field to search": {
+                                "query": "Enter search terms",
+                                "operator": "and"
+                        }
+                }
+        }
+}
+```
+### minimum_should_match
+```
+GET name_of_the_index/_search {
+        "query": {
+                "match":{
+                        "Specify the field to search": {
+                                "query": "Enter search terms",
+                                "minimum_should_match": Enter number of field to match
+                        }
+                }
+        }
+}
 ```
