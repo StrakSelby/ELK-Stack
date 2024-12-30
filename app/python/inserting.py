@@ -1,8 +1,9 @@
 import json
 from client import get_client
 
+es = get_client()
+
 def insert_document():
-    es = get_client()
     dummy_data = json.load(open('dummy_data.json'))
     def insert_document(document):
         response = es.index(index='my_index', body=document)

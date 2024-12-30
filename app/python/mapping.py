@@ -28,5 +28,5 @@ def create_mapping():
     }
     es.indices.put_mapping(index='my_index', body=mapping)
     index_mapping = es.indices.get_mapping(index='my_index')
-    print('Created mapping:\n')
-    pprint(index_mapping["my_index"]["mappings"]["properties"])
+    # print('Created mapping:\n')
+    # pprint(index_mapping["my_index"]["mappings"]["properties"])
