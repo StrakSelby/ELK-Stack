@@ -241,16 +241,18 @@ services:
       - ELASTIC_USER=elastic
       - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
       - ELASTIC_HOSTS=http://es01:9200  # Changed to HTTP
-  python-app:
-    build: .
-    container_name: python-app
-    volumes:
-      - ./app:/app
-    networks:
-      - default
-    ports:
-      - "5000:5000"
-    environment:
-      - PYTHONUNBUFFERED=1
-    restart: always
-    command: ["python", "/app/python/main.py"]
+  # python-app:
+  #   build: .
+  #   depends_on:
+  #     - es01
+  #   container_name: python-app
+  #   volumes:
+  #     - ./app:/app
+  #   networks:
+  #     - default
+  #   ports:
+  #     - "5000:5000"
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #   restart: always
+  #   command: [python /app/python/main.py]
